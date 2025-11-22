@@ -1,0 +1,15 @@
+name: On version.txt change
+
+on:
+  push:
+    branches:
+      - '**'          # any branch
+    paths:
+      - 'version.txt' # only run when this file changes in the root
+
+jobs:
+  call-reusable-workflow:
+    # Calls the reusable workflow in another file in this repo
+    uses: ./.github/workflows/reusable-version-workflow.yml
+    with:
+      ref: ${{ github.ref }}

@@ -1,0 +1,23 @@
+name: Reusable - Version Change Handler
+
+on:
+  workflow_call:
+    inputs:
+      ref:
+        description: 'Git ref from caller workflow'
+        required: false
+        type: string
+
+jobs:
+  handle-version-change:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Show ref and version.txt contents
+        run: |
+          echo "Triggered by ref: ${{ inputs.ref }}"
+          echo "version.txt contents:"
+          cat version.txt || echo "version.txt not found"
